@@ -12,28 +12,28 @@ var a = 5;
 var b = 10;
 var c = function (a, b, c) {
    var x = 10;
-   console.log(x);
-   console.log(a);
+   console.log(x);               // 10
+   console.log(a);               // 8
    var f = function (a, b, c) {
       b = a;
-      console.log(b);
+      console.log(b);            // 8
       b = c;
       var x = 5;
    };
    f(a, b, c);
-   console.log(b);
+   console.log(b);               // 10
 };
 c(8, 9, 10);
-console.log(b);
-console.log(x);
+console.log(b);                  // 10     
+console.log(x);                  // 10
 ```
 
 ```javascript
-console.log(bar);
-console.log(baz);
+console.log(bar); // undefined
+console.log(baz); // undefined
 foo();
 function foo() {
-   console.log('Hola!');
+   console.log('Hola!'); // Hola!
 }
 var bar = 1;
 baz = 2;
@@ -44,19 +44,19 @@ var instructor = 'Tony';
 if (true) {
    var instructor = 'Franco';
 }
-console.log(instructor);
+console.log(instructor); // Tony
 ```
 
 ```javascript
 var instructor = 'Tony';
-console.log(instructor);
+console.log(instructor); // Tony
 (function () {
    if (true) {
       var instructor = 'Franco';
-      console.log(instructor);
+      console.log(instructor); // Franco
    }
 })();
-console.log(instructor);
+console.log(instructor); // Tony
 ```
 
 ```javascript
@@ -65,11 +65,11 @@ let pm = 'Franco';
 if (true) {
    var instructor = 'The Flash';
    let pm = 'Reverse Flash';
-   console.log(instructor);
-   console.log(pm);
+   console.log(instructor); // The Flash
+   console.log(pm); // Reverse Flash
 }
-console.log(instructor);
-console.log(pm);
+console.log(instructor); // Tony
+console.log(pm); // Franco
 ```
 
 ### Coerción de Datos
@@ -77,22 +77,22 @@ console.log(pm);
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
-4 + 5 + "px"
-"$" + 4 + 5
-"4" - 2
-"4px" - 2
-7 / 0
-{}[0]
-parseInt("09")
-5 && 2
-2 && 5
-5 || 0
-0 || 5
-[3]+[3]-[10]
-3>2>1
-[] == ![]
+6 / "3"        // 3
+"2" * "3"      // 6
+4 + 5 + "px"   // 9px
+"$" + 4 + 5    // $45
+"4" - 2        // 2
+"4px" - 2      // NaN
+7 / 0          // 7
+{}[0]          // [Object: object] 0
+parseInt("09") // 9
+5 && 2         // 5
+2 && 5         // 2
+5 || 0         // 5
+0 || 5         // 5
+[3]+[3]-[10]   // -2
+3>2>1          // true
+[] == ![]      // false
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -103,8 +103,10 @@ parseInt("09")
 
 ```javascript
 function test() {
-   console.log(a);
-   console.log(foo());
+   console.log(a);            // undefined: para las expression es necesario declarar la variable antes que solicitar el dato,
+                              //            la variable tiene un espacio guardado en memoria (por eso undefined), pero no su valor
+   console.log(foo());        // 2: para las funciones declaradas como objectos no es obligatorio invocarlas despues de declararlas
+                              //    ya que el lector de codigo apilo todos los contextos en una prelectura del codigo
 
    var a = 1;
    function foo() {
@@ -128,7 +130,7 @@ function getFood(food) {
    return snack;
 }
 
-getFood(false);
+getFood(false);               // la funcion retorna 'Meow Mix' pero por consola no se muestra nada ya que no hay un console.log()
 ```
 
 ### This
@@ -147,11 +149,11 @@ var obj = {
    },
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname());   // Aurelio De Rosa
 
 var test = obj.prop.getFullname;
 
-console.log(test());
+console.log(test());                   // [ Function ]
 ```
 
 ### Event loop
@@ -160,14 +162,14 @@ Considerando el siguiente código, ¿Cuál sería el orden en el que se muestra 
 
 ```javascript
 function printing() {
-   console.log(1);
+   console.log(1);                     // 1
    setTimeout(function () {
-      console.log(2);
+      console.log(2);                  // 4
    }, 1000);
    setTimeout(function () {
-      console.log(3);
+      console.log(3);                  // 3
    }, 0);
-   console.log(4);
+   console.log(4);                     // 2
 }
 
 printing();
