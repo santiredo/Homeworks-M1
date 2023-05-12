@@ -3,7 +3,7 @@
 /* LISTAS ENLAZDAS */
 
 function Lista(){
-	this.point = null;
+	this.head = null;
 	this.len = 0;
 }
 
@@ -12,19 +12,29 @@ function Nodo(data) {
 	this.next = null;
 }
 
-Lista.prototype.push = function(data) { // Insert Last
-	var newNodo = new Nodo(data);
-	if (this.point == null) {
-		this.point = newNodo;
+Lista.prototype.push = function(data) {
+	const nuevoNodo = new Nodo(data);
+	if (!this.cabeza) {
+	  this.cabeza = nuevoNodo;
 	} else {
-		pointer = this.point;
-		while (pointer.next!=null) {
-			pointer = pointer.next;
-		}
-		pointer.next = newNodo;
+	  let nodoActual = this.cabeza;
+	  while (nodoActual.siguiente) {
+		nodoActual = nodoActual.siguiente;
+	  }
+	  nodoActual.siguiente = nuevoNodo;
 	}
+  }
+	
 	this.len++;
-}
+
+
+let lista = new Lista();
+let nodo = new Nodo('nodo1');
+let nodo2 = new Nodo('nodo2');
+lista.push(nodo);
+lista.push(nodo2);
+nodo.next = nodo2;
+console.log(nodo);
 
 Lista.prototype.insertFirst = function(data) {
 	var newNodo = new Nodo(data);

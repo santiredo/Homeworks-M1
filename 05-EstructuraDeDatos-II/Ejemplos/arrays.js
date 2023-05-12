@@ -13,6 +13,8 @@ function minimo(arr) {
   return aux;
 }
 
+console.log(minimo([1,2,3,2,4,2,3,5,5,6,7,9,4,3,1]))
+
 // MAYOR
 
 function mayor(arr) {

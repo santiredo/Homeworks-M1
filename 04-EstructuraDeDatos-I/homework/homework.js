@@ -25,12 +25,13 @@ function nFactorial(n) {
 
   if (n === 0) {
     return 1;
-  }  
+  }
+  if (n < 0){
+    throw Error = 'n debe ser mayor a 0';
+  }
   return n * nFactorial(menorAn);
   
 }
-
-console.log(nFactorial(5));
 
 function nFibonacci(n) {
 
@@ -40,11 +41,12 @@ function nFibonacci(n) {
   if (n === 1){
     return 1;
   }
-  else{
-    return nFibonacci(n-1) + nFibonacci(n-2)
+  if (n < 0){
+    throw Error = 'n debe ser un numero positivo'
   }
+  return nFibonacci(n-1) + nFibonacci(n-2);
+  
 }
-console.log(nFibonacci(5))
 
 /*
     Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa
