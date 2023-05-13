@@ -33,17 +33,20 @@ function Node(value) {
 LinkedList.prototype.add = function(value) {
   let newNode = new Node(value);  
 
-  if(this.head === null){
+  if(!this.head){
     this.head = newNode;
-  }else {
-    let current = this.head
-    while(current.next){
-      current = current.next;
-    }
-    current.next = newNode;
+    this.length++;
+    return `LinkedList.length: ${this.length}, newNode.value: ${newNode.value}`;
   }
 
+  let current = this.head
+  while(current.next){
+    current = current.next;
+  }
+
+  current.next = newNode;
   this.length++;
+  return `LinkedList.length: ${this.length}, newNode.value: ${newNode.value}`;
 }
 
 LinkedList.prototype.remove = function() {
@@ -65,8 +68,6 @@ LinkedList.prototype.remove = function() {
     this.length--
     return deleted.value;
   }
-  
-
 }
 
 LinkedList.prototype.search = function(e){
@@ -98,27 +99,31 @@ LinkedList.prototype.search = function(e){
 }
 
 
-function e(value){
-  if(value % 2 === 0 && value != 0){
+function esPar(num){
+  if(num % 2 === 0 && num != 0){
     return true
   }return false
 }
-console.log(typeof e === 'function')
-
+/* console.log(typeof e === 'function')
+ */
 let lista = new LinkedList();
 let obj = {
   nombre:'santi',
   edad:21
 }
-lista.add(1);
-lista.add(2);
-lista.add(3);
-lista.add(obj);
-lista.add(7);
-lista.add(7);
-lista.add(5);
 
-console.log(lista)
+lista.add(1);
+lista.add(3);
+lista.add(5);
+lista.add(5);
+/* console.log(lista.add(3)); */
+lista.add(obj);
+lista.add('santi');
+lista.add(7);
+lista.add(esPar);
+lista.remove();
+console.log();
+/* console.log(lista.search(e)) */
 
 
 /* EJERCICIO 2
