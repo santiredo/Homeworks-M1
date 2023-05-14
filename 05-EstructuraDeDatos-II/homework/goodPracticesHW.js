@@ -114,7 +114,6 @@ lista.remove();
 lista.remove();
 lista.remove();
 
-
 console.log(lista.search(callbackSerch))
 
 
