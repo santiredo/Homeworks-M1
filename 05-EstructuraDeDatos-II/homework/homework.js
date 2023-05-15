@@ -64,7 +64,6 @@ LinkedList.prototype.remove = function() {
     let current = this.head;
     while(current.next.next){
       current = current.next;
-      
     }
     let deleted = current.next;
     current.next = null;
@@ -75,31 +74,33 @@ LinkedList.prototype.remove = function() {
 
 LinkedList.prototype.search = function(e){
   if(typeof e === 'function'){
-    let current = this.head;
+    let nodoActual = this.head;
     
-    if(e(current.value)){
-      return current.value;
+    if(e(nodoActual.value)){
+      return nodoActual.value;
     }
-    while(current.next){
-      current = current.next;
-      if(e(current.value)){
-        return current.value;
+    while(nodoActual.next){
+      nodoActual = nodoActual.next;
+      if(e(nodoActual.value)){
+        return nodoActual.value;
       }
     }
-    return null;      
+    return null;
   }else{
-    let current = this.head;
+    let nodoActual = this.head;
     let count = 0;
     while(count < this.length){
-      if(current.value === e){
-        return current.value;
+      if(nodoActual.value === e){
+        return nodoActual.value;
       }
       count ++;
-      current = current.next;
+      nodoActual = nodoActual.next;
     }
     return null;
   }
 }
+
+console.log(esPar(4))
 
 
 function esPar(num){
@@ -115,7 +116,9 @@ let obj = {
   edad:21
 }
 
+
 lista.add(1);
+console.log(lista.search(esPar()))
 lista.add(3);
 lista.add(5);
 lista.add(5);
@@ -168,16 +171,16 @@ function HashTable() {
 HashTable.prototype.hash = function(key){
 
   // declaro la variable donde voy a sumar el codigo numerico de cada caracter
-  let sumCodes = 0;
+  let hash = 0;
 
   // recorro el string que recibi por parametro, calculo el codigo numerico de cada caracter
-  // y lo sumo al ultimo resultado de "sumCodes"
+  // y lo sumo al ultimo resultado de "hash"
   for(let i = 0 ; i < key.length ; i++){
-    sumCodes += key.charCodeAt(i);
+    hash += key.charCodeAt(i);
   }
 
   // realizo la operacion para determinar la posicion que ocupara el valor pasado por parametro
-  let position = sumCodes % this.numBuckets;
+  let position = hash % this.numBuckets;
 
   return position;
 }
@@ -195,15 +198,15 @@ HashTable.prototype.set = function(key, value){
 
   // almacenamos el conjunto 'key-value' en la posicion correcta:
   
-  // pregunto si la posicion recibida mediante el metodo .hash() ya es un objeto
-  if(this.buckets[position] === undefined){
-    //si ya es un objeto le asigno un nuevo par calve valor
+          // pregunto si la posicion recibida mediante el metodo .hash() ya es un objeto
+  if(!this.buckets[position]){
+          //si ya es un objeto le asigno un nuevo par calve valor
     this.buckets[position] = {
       [key] : value
     };
 
   }else{
-    // si no es un objeto lo creo asignandole el par clave valor
+          // si no es un objeto lo creo asignandole el par clave valor
     this.buckets[position][key] = value;
   }
 
@@ -219,8 +222,16 @@ HashTable.prototype.get = function(key){
   // guardo en una variable la posicion que deberia de estar ocupando el valor de la clave recibida por parametro
   let position = this.hash(key);
 
-  // retorno el valor que corresponde a la key recibida por parametro
-  return this.buckets[position][key];
+  
+  //creo un condicional para saber si el key pasado por parametro existe
+  // y para saber si esa posicion es un objeto
+  if(typeof this.buckets[position] === 'object' && this.buckets[position][key]){
+    // retorno el valor que corresponde a la key recibida por parametro
+    return this.buckets[position][key];
+  }else{
+    //retorno null si no se encuentra el valor pasado como key
+    return null
+  }
 }
 
 HashTable.prototype.hasKey = function(key){
@@ -263,6 +274,8 @@ console.log(table.set(key3, value3))
 
 
 console.log(table)
+
+console.log(table.get(key3))
 
 /* let objeto = {
   santi: 'santi',
