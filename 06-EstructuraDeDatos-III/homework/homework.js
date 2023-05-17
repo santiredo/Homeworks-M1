@@ -80,7 +80,7 @@ BinarySearchTree.prototype.depthFirstForEach = function (cb, order) {
  
      case "post-order":
          if (this.left) this.left.depthFirstForEach(cb, order);
-         if (this.right) this.right.depthFirstForEach(cb, order);
+         if (this.right) this.right.depthFirstForEach(cb, order);      // REALIZAR LAS BUENAS PRACTICAS DE ESTA FUNCION
          cb(this.value);
          break;
  
@@ -134,17 +134,14 @@ let arr2 = [2];
 let arr3 = [3]
 let arr1 = []
 
-console.log(myTree.depthFirstForEach(cb, "pre-order"))
-/* console.log(arr.concat(arr2, arr3))
-
-console.log(myTree) */
+console.log(myTree.breadthFirstForEach(cb))
 
 function cb(x) {
    arr1.push(x)
    console.log(x)
 
 };
-console.log(arr1);
+console.log(myTree);
 
 
 // No modifiquen nada debajo de esta linea
