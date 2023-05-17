@@ -162,7 +162,9 @@ class HashTable {
 
         let position = this.hash(key);
 
-        return this.buckets[position][key];
+        let place = this.buckets[position];
+
+        return typeof place === 'object' && place[key] ? place[key] : null
     }
 
     hasKey(key){
@@ -182,7 +184,7 @@ let obj1 = {
     name: 'santi',
     instructor: 'nico'
 }
-newTable.set(Object.keys(obj1).join(''), obj1.name)
+newTable.set(Object.keys(obj1).join(' '), obj1.name)
 
 console.log(newTable.hash('name'));
 
