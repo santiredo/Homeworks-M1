@@ -85,12 +85,10 @@ function mergeSort(array) {
       right.splice(0,1);
     }
   }
+/* 
+  merged = merged.concat(left, right); */
 
-  merged = merged.concat(left, right);
-  left.splice(0);
-  right.splice(0);
-
-  return merged;
+  return merged.concat(left, right);;
 }
 
 let arraw = [1,2,3];
